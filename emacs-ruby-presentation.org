@@ -1,0 +1,259 @@
+#+TITLE: Seattle.rb Emacs Demo
+#+AUTHOR: Andrew Buckingham
+#+DATE: March 1, 2016
+#+HTML_LINK_HOME: 
+#+STARTUP: indent
+#+OPTIONS: num:nil
+#+TODO: TODO(t) | | Started(s) | Waiting(w) | Someday/Maybe(m) | Canceled(c) | DONE(d)(@) | Meeting(M) | Note(n)
+
+https://en.wikipedia.org/wiki/space-cadet_keyboard#/media/file:space-cadet.jpg
+
+** self-introduction
+- andrew buckingham
+- http://andrewbuckingham.net
+- *twitter:* @abuckingham
+
+i'm available for hire... :)
+** introduction
+
+[[file:emacs-twitter.png][My thoughts on Magit-Mode]]
+
+- No flames/editor wars
+- I'm not trying to convince anyone to use Emacs, but I'd like to share some concepts that might be interesting/useful.
+*** Typical Criticisms
+- Too big/Memory Hog
+  - It's 2016. This really isn't an issue anymore. :)
+- Too slow to start up
+You can start it when you start up your computer, and keep it open. Emacs is designed to have a lot of buffers open.
+
+To speed up Emacs, you can use the daemon-mode/emacsclient. From my .bash_profile:
+
+#+BEGIN_SRC sh
+# Prefer console Emacs
+alias emacs=/Applications/Emacs.app/Contents/MacOS/Emacs
+alias e='emacsclient -t'
+alias ec='emacsclient -c'
+#+END_SRC
+
+With that setup, on the command line, I can type:
+
+#+BEGIN_SRC sh
+ec file.rb
+#+END_SRC
+
+And it will open in Emacs in a fraction of a second! Or just open the GUI Emacs.app and keep it open...
+
+- Keyboard shortcuts terrible
+  - Maybe not as bad as you think (shared with OSX)
+    - Logical and fast when you learn them
+      + Ctrl-X (C-x) is for system functions
+      + C-C is for minor-mode/personal shortcuts
+      + You can also rebind Cmd, Ctrl, Caps, and have more keys
+    - RSI? No reliable studies...
+  - Don't like them? Change them! ([[http://www.emacswiki.org/emacs/Evil][Evil-Mode]] gives you the best Vim emulator, in Emacs!)
+
+- Does more than an editor should/Doesn't follow 'Unix Way'
+  + Emacs isn't just an editor. It's a Lisp evaluation system, with buffers that interact with the underlying OS. If you use Emacs with different buffers, it's not unlike using Vim with Tmux and other utilities...
+  + Vim is moving away from this, too. See Tim Pope's plugins... :)
+  + If you use your browser to check mail, twitter, todos, is that the Unix Way...?
+  + So? We shouldn't be afraid to bend or break rules that limit our productivity.
+
+** Key Concepts
+- Everything is a buffer.
+- Emacs is *100% Extensible* and fully documented.
+The help system is amazing. *Everything* is documented, and the documentation is customized, based on your configuration.
+
+| Description       | Shortcut | Comment                                  |
+|-------------------+----------+------------------------------------------|
+| Help Menu         | C-h ?    | Main menu                                |
+| Function          | C-h f    | Visit documention for any function       |
+| Keyboard Shortcut | C-h k    | Find out what any keyboard shortcut does |
+| Info System       | C-h i    | View the Emacs manual in 'info' mode     |
+| Emacs Tutorial    | C-h t    | Start here to learn how to use Emacs.    |
+
+- Vocabulary
+Emacs uses special terminology...
+
+https://www.emacswiki.org/emacs/Window#window
+
+| In Emacs, a... | is what you might call...                                         |
+|----------------+-------------------------------------------------------------------|
+| Buffer         | The text you're working on (could be a file)                      |
+| Frame          | GUI Window (contains)                                             |
+| Window         | Subframe (inside the frame)                                        |
+| Mark           | A reference point (usually your previous 'point')                 |
+| Point          | The cursor                                                        |
+| Modeline       | The bottom area of the editor. Displays messages, errors, output. |
+| Kill           | Cut                                                               |
+| Yank           | Paste                                                             |
+  
+
+** Features
+
+*** Getting around
+| Movement                                    | Shortcut | Neumonic                                            |
+|---------------------------------------------+----------+-----------------------------------------------------|
+| Forward                                     | C-f      |                                                     |
+| Backward                                    | C-b      |                                                     |
+| Up                                          | C-p      | Previous                                            |
+| Down                                        | C-n      | Next (line)                                         |
+| Beginning of line                           | C-a      | "Alpha"/ABC                                         |
+| End of line                                 | C-e      | End                                                 |
+| Down one screen                             | C-v      | "down" arrow                                        |
+| Up one screen                               | M-v      | Meta/Alt/Option is often used for opposite commands |
+| Move current line to top, middle, or bottom | C-l      | "Line"                                              |
+
+- Kill/Yank
+  + C-K to kill from point to end of line/sentence/block
+  + C-A C-K: moves to front of line and then kills like (or Ctrl-Shift Delete, which also kills the blank lie)
+- Macros
+  - F3 to start
+  - F4 to finish
+  - F4 to run (prepend with Ctrl and a number to have it run that number of times; C-0 will make it run to the end of the file).
+  - <C-X C-K e> to edit the macro
+  - <C-X C-K n> to name the macro
+  - <C-X C-K i> to insert a compiled version of the macro (useful for your .emacs, to make it a permanent new feature)
+
+*** Transpose Features
+
+| Transpose  | Shortcut |
+|------------+----------|
+| Characters | C-t      |
+| Words      | M-t      |
+| Lines      | C-x C-t  |
+
+*** Registers
+Just like Vim, you can use registers to store text.
+
+| Buffer Action     | Shortcut         |
+|-------------------+------------------|
+| Store text        | C-x r x (letter) |
+| Insert text       | C-x r i (letter) |
+
+
+*** Rectangle Editing
+Similar to Vim's "Visual Mode"
+
+*** COMMENT Regex
+  + Regex Builder (or helm-regex)
+  + Incremental Search/Replace
+  + replace-regexp
+  + query-replace
+  + flush-lines
+  + keep-lines
+
+*** Undo Tree
+  + https://elpa.gnu.org/packages/undo-tree-readme.txt
+Everything that you do in Emacs is saved, and you can go to any point in your history to recover your work. Most applications have only a simple, linear undo. 
+***
+**** Example: [[file:undo_tree_example.md][Undo tree example]]
+*** Kill Ring
+The kill ring keeps all of the text that you kill, allowing you to yank it back.
+
+** Setup and Customization
+- Line Numbers (linum-mode)
+#+BEGIN_SRC emacs-lisp
+
+#+END_SRC
+- PowerLine 
+- Emacs is *100% Extensible* and fully documented
+  - .emacs.d
+    https://github.com/XiaoA/.emacs.d
+  - Great for learning programming
+    [[info:Elisp][Elisp]]
+    
+** Ruby Tricks
+- [[https://github.com/stanaka/dash-at-point][dash-at-point.el]]
+  + [[https://kapeli.com/dash][Dash]] is an API documentation browser (OSX only, I believe). You can integrate it with Emacs.
+  + Mac App Store link: https://itunes.apple.com/us/app/dash-api-docs-snippets/id458034879?mt=12
+
+#+BEGIN_SRC ruby :tangle ruby.ruby
+  def this_is_fake
+    puts nil
+  end
+#+END_SRC
+- [[http://batsov.com/projectile/][Projectile]]/Helm-Projectile
+- Robe (Provides documentation)
+- [[https://github.com/eschulte/rinari][Rinari]] (Rinari Is not a Rails IDE)
+- Ruby Console/Server in an Emacs Buffer
+- Run Rake/Minitest/RSpec in an Emacs Buffer
+** Cool Stuff I Use
+- An Awesome Package Installer. Install a package and use it in seconds.
+- [[http://www.orgmode.org][Org-Mode]]
+  + PIM/Time clock/Wiki/GTD or Todo manager/Document Preparation
+  + There's a Vim Port! https://github.com/hsitz/VimOrganizer
+
+  + Org-Babel/Literate Programming
+*** Org-Babel/Literate Programming Demo
+
+You can create a document that includes embedded code. You can evaluate the code in the buffer, or *tangle* it (creating an external file or group of files)
+
+- Supported languages: http://orgmode.org/manual/Languages.html#Languages
+
+Here is is a file, split into three blocks:
+
+#+BEGIN_SRC ruby :tangle org_babel_demo.rb
+puts "This is the first line"
+#+END_SRC
+
+#+BEGIN_SRC ruby :tangle org_babel_demo.rb
+puts "This is the second line"
+#+END_SRC
+
+#+BEGIN_SRC ruby :tangle org_babel_demo.rb
+puts "Can you guess which line this is?"
+#+END_SRC
+
+*To tangle the files, type: <C-c C-v t>*
+
+Because they're tangled to the same file, it looks like this:
+
+#+BEGIN_SRC ruby
+puts "This is the first line"
+puts "This is the second line"
+puts "Can you guess which line this is?"
+#+END_SRC
+
+You can view the file here: [[file:org_babel_demo.rb]]
+
+- [[https://github.com/magit/magit][Magit]]: Use Git in Emacs.
+  + http://endlessparentheses.com/create-github-prs-from-emacs-with-magit.html
+- [[https://github.com/emacs-helm/helm][Helm]]
+- [[http://ess.r-project.org][ESS (Emacs Speaks Statistics)]]
+- Shells/Terminals in Emacs buffers
+  + Emacs Eshell (with some extra features not included in Emacs yet...) was used in Tron Legacy
+    [[file:emacs.jpg][Eshell in Tron Legacy]]
+- Ace Jump Mode: https://github.com/winterTTr/ace-jump-mode
+- Vim has something similar: [[https://github.com/easymotion/vim-easymotion][vim-easymotion]]
+- Sublime 2: https://github.com/tednaleid/sublime-EasyMotion
+- Sublime 3: https://github.com/ice9js/ace-jump-sublime
+** Cool Stuff I Don't Use
+- MEMACS/Quantified Self (using Org-mode)
+    * [[http://arxiv.org/pdf/1304.1332v1.pdf][What really happened on September 15th 2008? Getting The Most from Your Personal Information with Memacs]]
+- Evil Mode: Use Vim in Emacs
+  + [[https://bitbucket.org/lyro/evil/wiki/Home][Evil Mode]]
+  + [[https://github.com/syl20bnr/spacemacs][spaceemacs]]
+- [[http://www.gnus.org][Gnus]] (Email/RSS/Newsgroups)
+- [[https://github.com/hayamiz/twittering-mode][Twittering Mode]]
+- [[https://www.gnu.org/software/auctex/img/preview-screenshot.png][AucTex]]
+** Insanity (?)
+- Games
+  Tetris is my favorite.
+- Video Editing
+https://www.emacswiki.org/emacs/GNEVE
+- Vimgolf in Emacs
+  https://vimeo.com/timvisher/videos/search:Vimgolf/sort:date
+** Useful links 
+- [[http://www.gnu.org/software/emacs/][Emacs Homepage]]
+- [[http://emacsrocks.com/][Emacs Rocks!]]
+- [[http://www.emacswiki.org/][Emacs Wiki]]
+*** Gurus
+- [[https://twitter.com/steve_yegge][Steve Yegge]]
+- [[http://www.sanityinc.com/][Steve Purcell]]
+- [[http://sachachua.com/blog/][Sacha Chua]]
+- [[http://www.slideshare.net/yukihiro_matz/how-emacs-changed-my-life][Matz: "How Emacs Changed My Life"]]
+- [[http://batsov.com/][Bozhidar Batsov]]
+  + RUBOCOP
+  + Ruby Style Guide
+
+    

@@ -1,0 +1,816 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Seattle.rb Emacs Demo</title>
+<!-- 2016-03-01 Tue 14:36 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Andrew Buckingham" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Seattle.rb Emacs Demo</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">Self-Introduction</a></li>
+<li><a href="#sec-2">Introduction</a>
+<ul>
+<li><a href="#sec-2-1">Typical Criticisms</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">Key Concepts</a></li>
+<li><a href="#sec-4">Features</a>
+<ul>
+<li><a href="#sec-4-1">Getting around</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">Setup and Customization</a></li>
+<li><a href="#sec-6">Stupid Ruby Tricks</a></li>
+<li><a href="#sec-7">Cool Stuff I Use</a>
+<ul>
+<li><a href="#sec-7-1">Org-Babel/Literate Programming Demo</a></li>
+</ul>
+</li>
+<li><a href="#sec-8">Cool Stuff I Don't Use</a></li>
+<li><a href="#sec-9">Insanity</a></li>
+<li><a href="#sec-10">Useful links</a>
+<ul>
+<li><a href="#sec-10-1">Gurus</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="figure">
+<p><img src="https://en.wikipedia.org/wiki/Space-cadet_keyboard#/media/File:Space-cadet.jpg" alt="File:Space-cadet.jpg" />
+</p>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Self-Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Andrew Buckingham
+</li>
+<li><a href="http://andrewbuckingham.net">http://andrewbuckingham.net</a>
+</li>
+<li><b>Twitter:</b> @abuckingham
+</li>
+</ul>
+
+<p>
+I'm available for hire&#x2026; :)
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Introduction</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>No flames/editor wars
+</li>
+<li>I'm not trying to convince anyone to use Emacs, but I'd like to share some concepts that might be interesting/useful.
+</li>
+<li>Documentation (C-h ?)
+</li>
+<li>Why Emacs is right <i>for me</i>&#x2026;
+</li>
+</ul>
+</div>
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1">Typical Criticisms</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>Too big/Memory Hog
+<ul class="org-ul">
+<li>Hi. It's 2016. Not an issue anymore. :)
+</li>
+</ul>
+</li>
+<li>Too slow to start up
+</li>
+</ul>
+<p>
+You can start it when you start up your computer, and keep it open. Emacs is designed to have a lot of buffers open.
+</p>
+
+<p>
+To speed up Emacs, you can use the daemon-mode/emacsclient. From my .bash<sub>profile</sub>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"># Prefer console Emacs
+alias emacs=/Applications/Emacs.app/Contents/MacOS/Emacs
+alias e='emacsclient -t'
+alias ec='emacsclient -c'
+</pre>
+</div>
+
+<p>
+With that setup, on the command line, I can type:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">ec file.rb
+</pre>
+</div>
+
+<p>
+And it will open in Emacs in a fraction of a second! Or just open the GUI Emacs.app and keep it open&#x2026;
+</p>
+
+<ul class="org-ul">
+<li>Keyboard shortcuts terrible
+<ul class="org-ul">
+<li>Maybe not as bad as you think (shared with OSX)
+<ul class="org-ul">
+<li>Logical and fast when you learn them
+<ul class="org-ul">
+<li>Ctrl-X (C-x) is for system functions
+</li>
+<li>C-C is for minor-mode/personal shortcuts
+</li>
+<li>You can also rebind Cmd, Ctrl, Caps, and have more keys
+</li>
+</ul>
+</li>
+<li>RSI? No reliable studies&#x2026;
+</li>
+</ul>
+</li>
+<li>Don't like them? Change them! (<a href="http://www.emacswiki.org/emacs/Evil">Evil-Mode</a> gives you the best Vim emulator, in Emacs!)
+</li>
+</ul>
+</li>
+
+<li>Does more than an editor should/Doesn't follow 'Unix Way'
+<ul class="org-ul">
+<li>Emacs isn't just an editor. It's a Lisp evaluation system, with buffers that interact with the underlying OS. If you use Emacs with different buffers, it's not unlike using Vim with Tmux and other utilities&#x2026;
+</li>
+<li>Vim is moving away from this, too. See Tim Pope's plugins&#x2026; :)
+</li>
+<li>If you use your browser to check mail, twitter, todos, is that the Unix Way&#x2026;?
+</li>
+<li>So? We shouldn't be afraid to bend or break rules that limit our productivity.
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">Key Concepts</h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li>Everything is a buffer.
+</li>
+<li>Emacs is <b>100% Extensible</b> and fully documented.
+</li>
+</ul>
+<p>
+The help system is amazing. <b>Everything</b> is documented, and the documentation is customized, based on your configuration.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Description</th>
+<th scope="col" class="left">Shortcut</th>
+<th scope="col" class="left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Help Menu</td>
+<td class="left">C-h ?</td>
+<td class="left">Main menu</td>
+</tr>
+
+<tr>
+<td class="left">Function</td>
+<td class="left">C-h f</td>
+<td class="left">Visit documention for any function</td>
+</tr>
+
+<tr>
+<td class="left">Keyboard Shortcut</td>
+<td class="left">C-h k</td>
+<td class="left">Find out what any keyboard shortcut does</td>
+</tr>
+
+<tr>
+<td class="left">Info System</td>
+<td class="left">C-h i</td>
+<td class="left">View the Emacs manual in 'info' mode</td>
+</tr>
+
+<tr>
+<td class="left">Emacs Tutorial</td>
+<td class="left">C-h t</td>
+<td class="left">Start here to learn how to use Emacs.</td>
+</tr>
+</tbody>
+</table>
+
+<ul class="org-ul">
+<li>Vocabulary
+</li>
+</ul>
+<p>
+Emacs uses special terminology&#x2026;
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">In Emacs, a&#x2026;</th>
+<th scope="col" class="left">is what you might call&#x2026;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Buffer</td>
+<td class="left">Window</td>
+</tr>
+
+<tr>
+<td class="left">Frame</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Window</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Mark</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Point</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Modeline</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Kill</td>
+<td class="left">Cut</td>
+</tr>
+
+<tr>
+<td class="left">Yank</td>
+<td class="left">Paste</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">Features</h2>
+<div class="outline-text-2" id="text-4">
+</div><div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1">Getting around</h3>
+<div class="outline-text-3" id="text-4-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Movement</th>
+<th scope="col" class="left">Shortcut</th>
+<th scope="col" class="left">Neumonic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Forward</td>
+<td class="left">C-f</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Backward</td>
+<td class="left">C-b</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Up</td>
+<td class="left">C-p</td>
+<td class="left">Previous</td>
+</tr>
+
+<tr>
+<td class="left">Down</td>
+<td class="left">C-n</td>
+<td class="left">Next (line)</td>
+</tr>
+
+<tr>
+<td class="left">Beginning of line</td>
+<td class="left">C-a</td>
+<td class="left">"Alpha"/ABC</td>
+</tr>
+
+<tr>
+<td class="left">End of line</td>
+<td class="left">C-e</td>
+<td class="left">End</td>
+</tr>
+
+<tr>
+<td class="left">Down one screen</td>
+<td class="left">C-v</td>
+<td class="left">"down" arrow</td>
+</tr>
+
+<tr>
+<td class="left">Up one screen</td>
+<td class="left">M-v</td>
+<td class="left">Meta/Alt/Option is often used for opposite commands</td>
+</tr>
+
+<tr>
+<td class="left">Move current line to top, middle, or bottom</td>
+<td class="left">C-l</td>
+<td class="left">"Line"</td>
+</tr>
+</tbody>
+</table>
+
+<ul class="org-ul">
+<li>Kill/Yank
+<ul class="org-ul">
+<li>C-K to kill from point to end of line/sentence/block
+</li>
+<li>C-A C-K: moves to front of line and then kills like (or Ctrl-Shift Delete, which also kills the blank lie)
+</li>
+</ul>
+</li>
+<li>Macros
+<ul class="org-ul">
+<li>F3 to start
+</li>
+<li>F4 to finish
+</li>
+<li>F4 to run (prepend with Ctrl and a number to have it run that number of times; C-0 will make it run to the end of the file).
+</li>
+<li>&lt;C-X C-K e&gt; to edit the macro
+</li>
+<li>&lt;C-X C-K n&gt; to name the macro
+</li>
+<li>&lt;C-X C-K i&gt; to insert a compiled version of the macro (useful for your .emacs, to make it a permanent new feature)
+</li>
+</ul>
+</li>
+<li>Registers
+</li>
+</ul>
+<p>
+Just like Vim, you can use registers to store text.
+</p>
+<ul class="org-ul">
+<li>Rectangle Editing
+</li>
+</ul>
+<p>
+Similar to Vim's "Visual Mode"
+</p>
+<ul class="org-ul">
+<li>Regex
+<ul class="org-ul">
+<li>Regex Builder (or helm-regex)
+</li>
+<li>Incremental Search/Replace
+</li>
+<li>replace-regexp
+</li>
+<li>query-replace
+</li>
+<li>flush-lines
+</li>
+<li>keep-lines
+</li>
+</ul>
+</li>
+
+<li>Undo Tree
+<ul class="org-ul">
+<li><a href="https://elpa.gnu.org/packages/undo-tree-readme.txt">https://elpa.gnu.org/packages/undo-tree-readme.txt</a>
+</li>
+</ul>
+</li>
+</ul>
+
+<p>
+Everything that you do in Emacs is saved, and you can go to any point in your history to recover your work. Most applications have only a simple, linear undo. 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">Setup and Customization</h2>
+<div class="outline-text-2" id="text-5">
+<ul class="org-ul">
+<li>Line Numbers (linum-mode)
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"></pre>
+</div>
+<ul class="org-ul">
+<li>PowerLine 
+</li>
+<li>Emacs is <b>100% Extensible</b> and fully documented
+<ul class="org-ul">
+<li>.emacs.d
+<a href="https://github.com/XiaoA/.emacs.d">https://github.com/XiaoA/.emacs.d</a>
+</li>
+<li>Great for learning programming
+<a href="Elisp">Elisp</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">Stupid Ruby Tricks</h2>
+<div class="outline-text-2" id="text-6">
+<ul class="org-ul">
+<li><a href="https://github.com/stanaka/dash-at-point">dash-at-point.el</a>
+<ul class="org-ul">
+<li><a href="https://kapeli.com/dash">Dash</a> is an API documentation browser (OSX only, I believe). You can integrate it with Emacs.
+</li>
+<li>Mac App Store link: <a href="https://itunes.apple.com/us/app/dash-api-docs-snippets/id458034879?mt=12">https://itunes.apple.com/us/app/dash-api-docs-snippets/id458034879?mt=12</a>
+</li>
+</ul>
+</li>
+<li><a href="http://batsov.com/projectile/">Projectile</a>
+</li>
+<li>Robe
+</li>
+<li><a href="https://github.com/eschulte/rinari">Rinari</a> (Rinari Is not a Rails IDE)
+</li>
+<li>Ruby Console/Server in an Emacs Buffer&#x2026;
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">Cool Stuff I Use</h2>
+<div class="outline-text-2" id="text-7">
+<ul class="org-ul">
+<li>An Awesome Package Installer. Install a package and use it in seconds.
+</li>
+<li><a href="http://www.orgmode.org">Org-Mode</a>
+<ul class="org-ul">
+<li>PIM/Time clock/Wiki/GTD or Todo manager/Document Preparation
+</li>
+<li>There's a Vim Port! <a href="https://github.com/hsitz/VimOrganizer">https://github.com/hsitz/VimOrganizer</a>
+</li>
+<li>MEMACS/Quantified Self
+<ul class="org-ul">
+<li><a href="http://arxiv.org/pdf/1304.1332v1.pdf">What really happened on September 15th 2008? Getting The Most from Your Personal Information with Memacs</a>
+</li>
+</ul>
+</li>
+<li>Org-Babel/Literate Programming
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="outline-container-sec-7-1" class="outline-3">
+<h3 id="sec-7-1">Org-Babel/Literate Programming Demo</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+You can create a document that includes embedded code. You can evaluate the code in the buffer, or <b>tangle</b> it (creating an external file or group of files)
+</p>
+
+<ul class="org-ul">
+<li>Supported languages: <a href="http://orgmode.org/manual/Languages.html#Languages">http://orgmode.org/manual/Languages.html#Languages</a>
+</li>
+</ul>
+
+<p>
+Here is is a file, split into three blocks:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-ruby">puts "This is the first line"
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-ruby">puts "This is the second line"
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-ruby">puts "Can you guess which line this is?"
+</pre>
+</div>
+
+<p>
+<b>To tangle the files, type: &lt;C-c C-v t&gt;</b>
+</p>
+
+<p>
+Because they're tangled to the same file, it looks like this:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-ruby">puts "This is the first line"
+puts "This is the second line"
+puts "Can you guess which line this is?"
+</pre>
+</div>
+
+<p>
+You can view the file here: <a href="org_babel_demo.rb">org_babel_demo.rb</a>
+</p>
+
+<ul class="org-ul">
+<li><a href="https://github.com/magit/magit">Magit</a>: Use Git in Emacs.
+<ul class="org-ul">
+<li><a href="http://endlessparentheses.com/create-github-prs-from-emacs-with-magit.html">http://endlessparentheses.com/create-github-prs-from-emacs-with-magit.html</a>
+</li>
+</ul>
+</li>
+<li><a href="https://github.com/emacs-helm/helm">Helm</a>
+</li>
+<li><a href="http://ess.r-project.org">ESS (Emacs Speaks Statistics)</a>
+</li>
+<li>Shells/Terminals in Emacs buffers
+<ul class="org-ul">
+<li>Emacs Eshell (with some extra features not included in Emacs yet&#x2026;) was used in Tron Legacy
+<a href="emacs.jpg">Eshell in Tron Legacy</a>
+</li>
+</ul>
+</li>
+<li>Ace Jump Mode: <a href="https://github.com/winterTTr/ace-jump-mode">https://github.com/winterTTr/ace-jump-mode</a>
+</li>
+<li>Vim has something similar: <a href="https://github.com/easymotion/vim-easymotion">vim-easymotion</a>
+</li>
+<li>Sublime 2: <a href="https://github.com/tednaleid/sublime-EasyMotion">https://github.com/tednaleid/sublime-EasyMotion</a>
+</li>
+<li>Sublime 3: <a href="https://github.com/ice9js/ace-jump-sublime">https://github.com/ice9js/ace-jump-sublime</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8">Cool Stuff I Don't Use</h2>
+<div class="outline-text-2" id="text-8">
+<ul class="org-ul">
+<li>Evil Mode: Use Vim in Emacs
+<ul class="org-ul">
+<li><a href="https://bitbucket.org/lyro/evil/wiki/Home">Evil Mode</a>
+</li>
+<li><a href="https://github.com/syl20bnr/spacemacs">spaceemacs</a>
+</li>
+</ul>
+</li>
+<li><a href="http://www.gnus.org">Gnus</a>
+</li>
+<li><a href="https://github.com/hayamiz/twittering-mode">Twittering Mode</a>
+</li>
+<li><a href="https://www.gnu.org/software/auctex/img/preview-screenshot.png">AucTex</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9">Insanity</h2>
+<div class="outline-text-2" id="text-9">
+<ul class="org-ul">
+<li>Games
+</li>
+<li>Video Editing
+</li>
+<li>Vimgolf in Emacs
+<a href="https://vimeo.com/timvisher/videos/search:Vimgolf/sort:date">https://vimeo.com/timvisher/videos/search:Vimgolf/sort:date</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10">Useful links</h2>
+<div class="outline-text-2" id="text-10">
+<ul class="org-ul">
+<li><a href="http://www.gnu.org/software/emacs/">Emacs Homepage</a>
+</li>
+<li><a href="http://emacsrocks.com/">Emacs Rocks!</a>
+</li>
+<li><a href="http://www.emacswiki.org/">Emacs Wiki</a>
+</li>
+</ul>
+</div>
+<div id="outline-container-sec-10-1" class="outline-3">
+<h3 id="sec-10-1">Gurus</h3>
+<div class="outline-text-3" id="text-10-1">
+<ul class="org-ul">
+<li><a href="https://twitter.com/steve_yegge">Steve Yegge</a>
+</li>
+<li><a href="http://www.sanityinc.com/">Steve Purcell</a>
+</li>
+<li><a href="http://sachachua.com/blog/">Sacha Chua</a>
+</li>
+<li><a href="http://www.slideshare.net/yukihiro_matz/how-emacs-changed-my-life">Matz: "How Emacs Changed My Life"</a>
+</li>
+<li><a href="http://batsov.com/">Bozhidar Batsov</a>
+<ul class="org-ul">
+<li>RUBOCOP
+</li>
+<li>Ruby Style Guide
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: March 1, 2016</p>
+<p class="author">Author: Andrew Buckingham</p>
+<p class="date">Created: 2016-03-01 Tue 14:36</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.0.50.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
