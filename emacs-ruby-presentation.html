@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Seattle.rb Emacs Demo</title>
-<!-- 2016-03-01 Tue 14:36 -->
+<!-- 2016-03-01 Tue 19:46 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Andrew Buckingham" />
@@ -142,8 +142,8 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">Self-Introduction</a></li>
-<li><a href="#sec-2">Introduction</a>
+<li><a href="#sec-1">self-introduction</a></li>
+<li><a href="#sec-2">introduction</a>
 <ul>
 <li><a href="#sec-2-1">Typical Criticisms</a></li>
 </ul>
@@ -152,17 +152,28 @@ for the JavaScript code in this tag.
 <li><a href="#sec-4">Features</a>
 <ul>
 <li><a href="#sec-4-1">Getting around</a></li>
+<li><a href="#sec-4-2">Transpose Features</a></li>
+<li><a href="#sec-4-3">Registers</a></li>
+<li><a href="#sec-4-4">Rectangle Editing</a></li>
+<li><a href="#sec-4-5">Undo Tree</a>
+<ul>
+<li><a href="#sec-4-5-1">Example: Undo tree example</a></li>
+</ul>
+</li>
+<li><a href="#sec-4-6">Kill Ring</a></li>
 </ul>
 </li>
 <li><a href="#sec-5">Setup and Customization</a></li>
-<li><a href="#sec-6">Stupid Ruby Tricks</a></li>
+<li><a href="#sec-6">Ruby Tricks</a></li>
 <li><a href="#sec-7">Cool Stuff I Use</a>
 <ul>
-<li><a href="#sec-7-1">Org-Babel/Literate Programming Demo</a></li>
+<li><a href="#sec-7-1">Org-Mode</a></li>
+<li><a href="#sec-7-2">Org-Babel/Literate Programming Demo</a></li>
+<li><a href="#sec-7-3">Magit</a></li>
 </ul>
 </li>
 <li><a href="#sec-8">Cool Stuff I Don't Use</a></li>
-<li><a href="#sec-9">Insanity</a></li>
+<li><a href="#sec-9">Insanity (?)</a></li>
 <li><a href="#sec-10">Useful links</a>
 <ul>
 <li><a href="#sec-10-1">Gurus</a></li>
@@ -173,38 +184,34 @@ for the JavaScript code in this tag.
 </div>
 
 <div class="figure">
-<p><img src="https://en.wikipedia.org/wiki/Space-cadet_keyboard#/media/File:Space-cadet.jpg" alt="File:Space-cadet.jpg" />
+<p><img src="https://en.wikipedia.org/wiki/space-cadet_keyboard#/media/file:space-cadet.jpg" alt="file:space-cadet.jpg" />
 </p>
 </div>
 
 <div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">Self-Introduction</h2>
+<h2 id="sec-1">self-introduction</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
-<li>Andrew Buckingham
+<li>andrew buckingham
 </li>
 <li><a href="http://andrewbuckingham.net">http://andrewbuckingham.net</a>
 </li>
-<li><b>Twitter:</b> @abuckingham
+<li><b>twitter:</b> @abuckingham
 </li>
 </ul>
 
 <p>
-I'm available for hire&#x2026; :)
+i'm available for hire&#x2026; :)
 </p>
 </div>
 </div>
 <div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">Introduction</h2>
+<h2 id="sec-2">introduction</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>No flames/editor wars
 </li>
 <li>I'm not trying to convince anyone to use Emacs, but I'd like to share some concepts that might be interesting/useful.
-</li>
-<li>Documentation (C-h ?)
-</li>
-<li>Why Emacs is right <i>for me</i>&#x2026;
 </li>
 </ul>
 </div>
@@ -214,7 +221,7 @@ I'm available for hire&#x2026; :)
 <ul class="org-ul">
 <li>Too big/Memory Hog
 <ul class="org-ul">
-<li>Hi. It's 2016. Not an issue anymore. :)
+<li>It's 2016. This really isn't an issue anymore. :)
 </li>
 </ul>
 </li>
@@ -364,6 +371,10 @@ The help system is amazing. <b>Everything</b> is documented, and the documentati
 Emacs uses special terminology&#x2026;
 </p>
 
+<p>
+<a href="https://www.emacswiki.org/emacs/Window#window">https://www.emacswiki.org/emacs/Window#window</a>
+</p>
+
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -381,32 +392,32 @@ Emacs uses special terminology&#x2026;
 <tbody>
 <tr>
 <td class="left">Buffer</td>
-<td class="left">Window</td>
+<td class="left">The text you're working on (could be a file)</td>
 </tr>
 
 <tr>
 <td class="left">Frame</td>
-<td class="left">&#xa0;</td>
+<td class="left">GUI Window (contains)</td>
 </tr>
 
 <tr>
 <td class="left">Window</td>
-<td class="left">&#xa0;</td>
+<td class="left">Subframe (inside the frame)</td>
 </tr>
 
 <tr>
 <td class="left">Mark</td>
-<td class="left">&#xa0;</td>
+<td class="left">A reference point (usually your previous 'point')</td>
 </tr>
 
 <tr>
 <td class="left">Point</td>
-<td class="left">&#xa0;</td>
+<td class="left">The cursor</td>
 </tr>
 
 <tr>
 <td class="left">Modeline</td>
-<td class="left">&#xa0;</td>
+<td class="left">The bottom area of the editor. Displays messages, errors, output.</td>
 </tr>
 
 <tr>
@@ -529,51 +540,119 @@ Emacs uses special terminology&#x2026;
 </li>
 </ul>
 </li>
-<li>Registers
-</li>
 </ul>
+</div>
+</div>
+
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2">Transpose Features</h3>
+<div class="outline-text-3" id="text-4-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Transpose</th>
+<th scope="col" class="left">Shortcut</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Characters</td>
+<td class="left">C-t</td>
+</tr>
+
+<tr>
+<td class="left">Words</td>
+<td class="left">M-t</td>
+</tr>
+
+<tr>
+<td class="left">Lines</td>
+<td class="left">C-x C-t</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3">Registers</h3>
+<div class="outline-text-3" id="text-4-3">
 <p>
 Just like Vim, you can use registers to store text.
 </p>
-<ul class="org-ul">
-<li>Rectangle Editing
-</li>
-</ul>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Buffer Action</th>
+<th scope="col" class="left">Shortcut</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Store text</td>
+<td class="left">C-x r x (letter)</td>
+</tr>
+
+<tr>
+<td class="left">Insert text</td>
+<td class="left">C-x r i (letter)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4-4" class="outline-3">
+<h3 id="sec-4-4">Rectangle Editing</h3>
+<div class="outline-text-3" id="text-4-4">
 <p>
 Similar to Vim's "Visual Mode"
 </p>
-<ul class="org-ul">
-<li>Regex
-<ul class="org-ul">
-<li>Regex Builder (or helm-regex)
-</li>
-<li>Incremental Search/Replace
-</li>
-<li>replace-regexp
-</li>
-<li>query-replace
-</li>
-<li>flush-lines
-</li>
-<li>keep-lines
-</li>
-</ul>
-</li>
+</div>
+</div>
 
-<li>Undo Tree
+<div id="outline-container-sec-4-5" class="outline-3">
+<h3 id="sec-4-5">Undo Tree</h3>
+<div class="outline-text-3" id="text-4-5">
 <ul class="org-ul">
 <li><a href="https://elpa.gnu.org/packages/undo-tree-readme.txt">https://elpa.gnu.org/packages/undo-tree-readme.txt</a>
 </li>
 </ul>
-</li>
-</ul>
-
 <p>
 Everything that you do in Emacs is saved, and you can go to any point in your history to recover your work. Most applications have only a simple, linear undo. 
+<b>*</b>
+</p>
+</div>
+<div id="outline-container-sec-4-5-1" class="outline-4">
+<h4 id="sec-4-5-1">Example: <a href="undo_tree_example.md">Undo tree example</a></h4>
+</div>
+</div>
+<div id="outline-container-sec-4-6" class="outline-3">
+<h3 id="sec-4-6">Kill Ring</h3>
+<div class="outline-text-3" id="text-4-6">
+<p>
+The kill ring keeps all of the text that you kill, allowing you to yank it back.
 </p>
 </div>
 </div>
 </div>
+
 <div id="outline-container-sec-5" class="outline-2">
 <h2 id="sec-5">Setup and Customization</h2>
 <div class="outline-text-2" id="text-5">
@@ -603,7 +682,7 @@ Everything that you do in Emacs is saved, and you can go to any point in your hi
 </div>
 
 <div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6">Stupid Ruby Tricks</h2>
+<h2 id="sec-6">Ruby Tricks</h2>
 <div class="outline-text-2" id="text-6">
 <ul class="org-ul">
 <li><a href="https://github.com/stanaka/dash-at-point">dash-at-point.el</a>
@@ -614,13 +693,25 @@ Everything that you do in Emacs is saved, and you can go to any point in your hi
 </li>
 </ul>
 </li>
-<li><a href="http://batsov.com/projectile/">Projectile</a>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-ruby">def this_is_fake
+  puts nil
+end
+</pre>
+</div>
+<ul class="org-ul">
+<li><a href="http://batsov.com/projectile/">Projectile</a>/Helm-Projectile
 </li>
-<li>Robe
+<li>Robe (Provides documentation)
 </li>
 <li><a href="https://github.com/eschulte/rinari">Rinari</a> (Rinari Is not a Rails IDE)
 </li>
-<li>Ruby Console/Server in an Emacs Buffer&#x2026;
+<li>Ruby Console/Server in an Emacs Buffer
+</li>
+<li>Run Rake/Minitest/RSpec in an Emacs Buffer
 </li>
 </ul>
 </div>
@@ -631,27 +722,25 @@ Everything that you do in Emacs is saved, and you can go to any point in your hi
 <ul class="org-ul">
 <li>An Awesome Package Installer. Install a package and use it in seconds.
 </li>
-<li><a href="http://www.orgmode.org">Org-Mode</a>
+</ul>
+</div>
+<div id="outline-container-sec-7-1" class="outline-3">
+<h3 id="sec-7-1"><a href="http://www.orgmode.org">Org-Mode</a></h3>
+<div class="outline-text-3" id="text-7-1">
 <ul class="org-ul">
 <li>PIM/Time clock/Wiki/GTD or Todo manager/Document Preparation
 </li>
 <li>There's a Vim Port! <a href="https://github.com/hsitz/VimOrganizer">https://github.com/hsitz/VimOrganizer</a>
 </li>
-<li>MEMACS/Quantified Self
-<ul class="org-ul">
-<li><a href="http://arxiv.org/pdf/1304.1332v1.pdf">What really happened on September 15th 2008? Getting The Most from Your Personal Information with Memacs</a>
-</li>
-</ul>
-</li>
+
 <li>Org-Babel/Literate Programming
 </li>
 </ul>
-</li>
-</ul>
 </div>
-<div id="outline-container-sec-7-1" class="outline-3">
-<h3 id="sec-7-1">Org-Babel/Literate Programming Demo</h3>
-<div class="outline-text-3" id="text-7-1">
+</div>
+<div id="outline-container-sec-7-2" class="outline-3">
+<h3 id="sec-7-2">Org-Babel/Literate Programming Demo</h3>
+<div class="outline-text-3" id="text-7-2">
 <p>
 You can create a document that includes embedded code. You can evaluate the code in the buffer, or <b>tangle</b> it (creating an external file or group of files)
 </p>
@@ -702,13 +791,18 @@ puts "Can you guess which line this is?"
 <p>
 You can view the file here: <a href="org_babel_demo.rb">org_babel_demo.rb</a>
 </p>
+</div>
+</div>
+<div id="outline-container-sec-7-3" class="outline-3">
+<h3 id="sec-7-3">Magit</h3>
+<div class="outline-text-3" id="text-7-3">
+<p>
+<a href="https://github.com/magit/magit">Magit</a>: Use Git in Emacs.
+<a href="emacs-twitter.png">My thoughts on Magit-Mode</a>
+</p>
 
 <ul class="org-ul">
-<li><a href="https://github.com/magit/magit">Magit</a>: Use Git in Emacs.
-<ul class="org-ul">
 <li><a href="http://endlessparentheses.com/create-github-prs-from-emacs-with-magit.html">http://endlessparentheses.com/create-github-prs-from-emacs-with-magit.html</a>
-</li>
-</ul>
 </li>
 <li><a href="https://github.com/emacs-helm/helm">Helm</a>
 </li>
@@ -737,6 +831,12 @@ You can view the file here: <a href="org_babel_demo.rb">org_babel_demo.rb</a>
 <h2 id="sec-8">Cool Stuff I Don't Use</h2>
 <div class="outline-text-2" id="text-8">
 <ul class="org-ul">
+<li>MEMACS/Quantified Self (using Org-mode)
+<ul class="org-ul">
+<li><a href="http://arxiv.org/pdf/1304.1332v1.pdf">What really happened on September 15th 2008? Getting The Most from Your Personal Information with Memacs</a>
+</li>
+</ul>
+</li>
 <li>Evil Mode: Use Vim in Emacs
 <ul class="org-ul">
 <li><a href="https://bitbucket.org/lyro/evil/wiki/Home">Evil Mode</a>
@@ -745,7 +845,7 @@ You can view the file here: <a href="org_babel_demo.rb">org_babel_demo.rb</a>
 </li>
 </ul>
 </li>
-<li><a href="http://www.gnus.org">Gnus</a>
+<li><a href="http://www.gnus.org">Gnus</a> (Email/RSS/Newsgroups)
 </li>
 <li><a href="https://github.com/hayamiz/twittering-mode">Twittering Mode</a>
 </li>
@@ -755,12 +855,19 @@ You can view the file here: <a href="org_babel_demo.rb">org_babel_demo.rb</a>
 </div>
 </div>
 <div id="outline-container-sec-9" class="outline-2">
-<h2 id="sec-9">Insanity</h2>
+<h2 id="sec-9">Insanity (?)</h2>
 <div class="outline-text-2" id="text-9">
 <ul class="org-ul">
 <li>Games
+Tetris is my favorite.
 </li>
 <li>Video Editing
+<ul class="org-ul">
+<li><a href="https://www.emacswiki.org/emacs/GNEVE">https://www.emacswiki.org/emacs/GNEVE</a>
+</li>
+<li><a href="https://www.youtube.com/watch?v=0vumR5Hcz7s">https://www.youtube.com/watch?v=0vumR5Hcz7s</a>
+</li>
+</ul>
 </li>
 <li>Vimgolf in Emacs
 <a href="https://vimeo.com/timvisher/videos/search:Vimgolf/sort:date">https://vimeo.com/timvisher/videos/search:Vimgolf/sort:date</a>
@@ -777,6 +884,8 @@ You can view the file here: <a href="org_babel_demo.rb">org_babel_demo.rb</a>
 <li><a href="http://emacsrocks.com/">Emacs Rocks!</a>
 </li>
 <li><a href="http://www.emacswiki.org/">Emacs Wiki</a>
+</li>
+<li><a href="http://andrewbuckingham.net/blog/2014/07/27/Emacs-My-Editor-of-Choice/">http://andrewbuckingham.net/blog/2014/07/27/Emacs-My-Editor-of-Choice/</a>
 </li>
 </ul>
 </div>
@@ -808,7 +917,7 @@ You can view the file here: <a href="org_babel_demo.rb">org_babel_demo.rb</a>
 <div id="postamble" class="status">
 <p class="date">Date: March 1, 2016</p>
 <p class="author">Author: Andrew Buckingham</p>
-<p class="date">Created: 2016-03-01 Tue 14:36</p>
+<p class="date">Created: 2016-03-01 Tue 19:46</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.0.50.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

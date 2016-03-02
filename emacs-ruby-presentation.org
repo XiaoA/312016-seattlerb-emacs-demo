@@ -16,7 +16,7 @@ https://en.wikipedia.org/wiki/space-cadet_keyboard#/media/file:space-cadet.jpg
 i'm available for hire... :)
 ** introduction
 
-[[file:emacs-twitter.png][My thoughts on Magit-Mode]]
+
 
 - No flames/editor wars
 - I'm not trying to convince anyone to use Emacs, but I'd like to share some concepts that might be interesting/useful.
@@ -59,6 +59,7 @@ And it will open in Emacs in a fraction of a second! Or just open the GUI Emacs.
   + So? We shouldn't be afraid to bend or break rules that limit our productivity.
 
 ** Key Concepts
+
 - Everything is a buffer.
 - Emacs is *100% Extensible* and fully documented.
 The help system is amazing. *Everything* is documented, and the documentation is customized, based on your configuration.
@@ -122,6 +123,7 @@ https://www.emacswiki.org/emacs/Window#window
 | Words      | M-t      |
 | Lines      | C-x C-t  |
 
+
 *** Registers
 Just like Vim, you can use registers to store text.
 
@@ -129,7 +131,6 @@ Just like Vim, you can use registers to store text.
 |-------------------+------------------|
 | Store text        | C-x r x (letter) |
 | Insert text       | C-x r i (letter) |
-
 
 *** Rectangle Editing
 Similar to Vim's "Visual Mode"
@@ -179,7 +180,7 @@ The kill ring keeps all of the text that you kill, allowing you to yank it back.
 - Run Rake/Minitest/RSpec in an Emacs Buffer
 ** Cool Stuff I Use
 - An Awesome Package Installer. Install a package and use it in seconds.
-- [[http://www.orgmode.org][Org-Mode]]
+*** [[http://www.orgmode.org][Org-Mode]]
   + PIM/Time clock/Wiki/GTD or Todo manager/Document Preparation
   + There's a Vim Port! https://github.com/hsitz/VimOrganizer
 
@@ -192,6 +193,10 @@ You can create a document that includes embedded code. You can evaluate the code
 
 Here is is a file, split into three blocks:
 
+#+BEGIN_SRC ruby :tangle ~/Desktop/hello.rb
+puts "hello"
+
+#+END_SRC
 #+BEGIN_SRC ruby :tangle org_babel_demo.rb
 puts "This is the first line"
 #+END_SRC
@@ -204,6 +209,13 @@ puts "This is the second line"
 puts "Can you guess which line this is?"
 #+END_SRC
 
+
+| whatever | 2 | something |
+|----------+---+-----------|
+| whatever | 4 |           |
+|          |   |           |
+
+  
 *To tangle the files, type: <C-c C-v t>*
 
 Because they're tangled to the same file, it looks like this:
@@ -215,8 +227,10 @@ puts "Can you guess which line this is?"
 #+END_SRC
 
 You can view the file here: [[file:org_babel_demo.rb]]
+*** Magit
+[[https://github.com/magit/magit][Magit]]: Use Git in Emacs.
+[[file:emacs-twitter.png][My thoughts on Magit-Mode]]
 
-- [[https://github.com/magit/magit][Magit]]: Use Git in Emacs.
   + http://endlessparentheses.com/create-github-prs-from-emacs-with-magit.html
 - [[https://github.com/emacs-helm/helm][Helm]]
 - [[http://ess.r-project.org][ESS (Emacs Speaks Statistics)]]
@@ -240,13 +254,15 @@ You can view the file here: [[file:org_babel_demo.rb]]
 - Games
   Tetris is my favorite.
 - Video Editing
-https://www.emacswiki.org/emacs/GNEVE
+  + https://www.emacswiki.org/emacs/GNEVE
+  + https://www.youtube.com/watch?v=0vumR5Hcz7s
 - Vimgolf in Emacs
   https://vimeo.com/timvisher/videos/search:Vimgolf/sort:date
 ** Useful links 
 - [[http://www.gnu.org/software/emacs/][Emacs Homepage]]
 - [[http://emacsrocks.com/][Emacs Rocks!]]
 - [[http://www.emacswiki.org/][Emacs Wiki]]
+- http://andrewbuckingham.net/blog/2014/07/27/Emacs-My-Editor-of-Choice/
 *** Gurus
 - [[https://twitter.com/steve_yegge][Steve Yegge]]
 - [[http://www.sanityinc.com/][Steve Purcell]]
